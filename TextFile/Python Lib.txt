@@ -1,0 +1,55 @@
+pip install django-extensions 	 
+	: shell_plus
+
+pip install django-debug-toolbar
+	: 디버그 내역을 보기위한 라이브러리
+	: https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
+
+pip install jupyter 			 
+	: Ipython + Jupyter (더 유용한 shell)
+
+pip install pillow			 	 
+	: 이미지 파일을 사용하기위한 라이브러리
+	
+	<settings에서 설정>
+	MEDIA_URL = '/url문자열/'
+	MEDIA_ROOT = os.path.join(BASE_DIR, '디렉토리명')
+	
+	<프로젝트 urls.py에서 설정>
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+pip install django-bootstrap-v5  
+	: 장고 부트스트랩5
+	
+pip install django-pydenticon
+	: 사용자별 기본 프로필 이미지
+	: https://django-pydenticon.readthedocs.io/en/0.2/installation.html
+	
+pip install easy-thumbnails
+	: 썸네일 설정
+	: https://github.com/SmileyChris/easy-thumbnails
+	
+pip install django-imagekit
+	: 이미지 관리 세부설정
+	
+pip install django-taggit
+	: 태그 세부설정
+	
+pip install djangorestframwork~=3.11.0
+	: django 프레임워크
+	: https://www.django-rest-framework.org/#installation
+	
+pip install httpie
+	: HTTP 요청시 사용
+	
+humanize
+	: django의 내장된 라이브러리. 사용자가 알기쉽게끔 언어를 변환해준다.
+	: https://docs.djangoproject.com/en/4.1/ref/contrib/humanize/
+	
+	
+
+/* 
+장고 shell or cmd에서 명령어 적용해야함
+대부분의 라이브러리는 설치지침에 따라서 설정을 해줘야함
+*/

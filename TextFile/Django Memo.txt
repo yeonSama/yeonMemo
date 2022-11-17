@@ -1,0 +1,3 @@
+request.headers.get('x-requested-with') == 'XMLHttpRequest'
+	: view에서 ajax을 요청했을때 사용함
+	

@@ -1,0 +1,84 @@
+[ project create ]
+
+cd <프로젝트명>						 			
+	: 해당경로로 이동
+	
+conda env list
+	: 가상환경 목록
+	
+conda env remove --name <가상환경이름>
+	: 가상환경 삭제
+	
+conda craete --name <가상환경이름> python=3.9	
+	: 가상환경 생성
+
+conda activate <가상환경이름>					
+	: 가상환경 접속
+	
+pip install "django~=3.0.0"		 			
+	: 장고설치
+
+django-admin startproject <프로젝트명> 			
+	: 프로젝트 생성
+
+python manage.py migrate 					
+	: 지정 데이터베이스에 마이그레이션 적용
+
+python manage.py createsuperuser 	 		
+	: 계정생성
+
+python manage.py startapp <앱이름>		  		
+	: 앱생성 (앱생성후 settings.INSTALLED_APPS에 등록시켜줘야한다.)
+
+python manage.py runserver 			 		
+	: 서버실행
+
+----------------------------------------------------------
+
+[ model & dataBase ]
+
+python manage.py makemigrations <앱이름>				
+	: 모델의 생성/변경 내역을 히스토리 관리, 마이그레이션 생성
+
+python manage.py migrate <앱이름> 	  	 			
+	: 지정 데이터베이스에 마이그레이션 적용
+	  미적용 <마이그레이션-파일>부터 <최근-마이그레이션-파일>까지 정방향으로 순차적으로 수행
+
+python manage.py migrate <앱이름> <마이그레이션-이름>		
+	: 지정된 <마이그레이션-이름>이 현재 적용된 마이그레이션보다 이후라면 정방향으로 순차적으로 지정 마이그레이션까지 foward 수행
+	  이전이라면, 역방향으로 순차적으로 지정 마이그레이션 이전까지 backward 수행
+
+python manage.py showmigrations <앱이름> 				
+	: 마이그레이션 적용 현황 출력
+	
+python manage.py migrate --fake 프로젝트_앱 zero
+	: 마이그레이트 적용해제
+	
+python manage.py migrate --fake-initial
+	: 페이크 마이그레이션 처리
+
+python manage.py sqlmigrate <앱이름> <마이그레이션-이름>		
+	: 지정 마이그레이션의 SQL 내역 출력
+
+----------------------------------------------------------
+
+[ shell ]
+
+python manage.py shell 							  
+	: default shell
+
+python manage.py shell_plus --notebook			  
+	: 주피터 접속
+
+python manage.py shell_plus --print-sql --ipython 
+	: shell_plus/ipython 버전
+
+[ shell 사용전에 입력 ]
+
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = '<프로젝트 settings 경로>'
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+import django
+django.setup()
+
+----------------------------------------------------------

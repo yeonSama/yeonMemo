@@ -1,0 +1,96 @@
+# askcompany는 project를 생성했을때 이름과 동일한 GeneralApp이다.
+
+1. python manage.py startapp <프로젝트명>으로 앱을 생성한다.
+
+
+2. 앱에서 urls.py를 만들어주고 urlpatterns=[]를 만들어준다.
+
+
+3. settings INSTALLED_APPS에다가 만든앱을 추가해준다.
+
+	예) : INSTALLED_APPS = [
+			yeon',
+		]
+		
+		
+4. 프로젝트 urls.py에서 urlpatterns=[]에 경로를 지정해준다.
+
+	예) : path('yeon/', include('yeon.urls')),
+
+
+5. models.py에서 모델을 생성해준다.
+
+	예) : class Post(models.Model):
+			pass
+			
+		필드/모델을 만들거나 수정했다면 아래 작업을 무조건적으로 수행해줘야한다.
+		python manage.py makemigrations <앱이름>
+			: 모델 히스토리를 생성한다
+		python manage.py migrate <앱이름>
+			: 모델 히스토리를 적용한다
+		
+		
+6. admin.py에서 어드민 장식자&클래스를 만들어준다.
+
+	예) : @admin.register(Post)
+		 class PostAdmin(admin.ModelAdmin):
+			pass
+		
+		
+7. TEMPLATES, STATIC, MEMDIA 경로를 설정해준다.
+
+	# TEMPLATES = 'DIRS': [
+            os.path.join(BASE_DIR, 'askcompany', 'templates'),
+        ],
+	
+	# STATIC_URL = '/static/'
+	  STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+	  STATICFILES_DIRS = [
+			os.path.join(BASE_DIR, 'askcompany', 'static')
+		]
+		
+	# MEDIA_URL = '/media/'
+	  MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+	  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+		
+		
+8. requiredments 폴더를 만들고 commoon, dev, prod 개발환경을 분리구축해준다.
+
+	# requiredments
+		# common.txt 
+			: 개발환경에 필요한 라이브러리들을 작성
+		# prod.txt, dev.txt 	 
+			: -r common.txt
+
+	# requirements.txt 
+		: -r requirements/prod.txt
+	
+	
+9. settings를 분리하여 Developer, Production 환경을 분리구축한다.
+
+	# 별도경로의 settings 폴더를 만들고 settings.py 파일이동 
+	  예) : Project/askcompany/settings/common.py
+	  
+	# dev.py, prod,py 
+		: from .common import *
+	
+	# asgi,wsgi 
+		: os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'askcompany.settings.prod')
+	
+	# manage.py 
+		: os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'askcompany.settings.dev')
+	
+	
+10. BASE DIRECTORY 경로를 설정해준다.
+
+	# from os.path import dirname, abspath
+	# BASE_DIR = dirname(dirname(dirname(abspath(__file__))))	
+	
+	#@ pathlib을 사용할경우
+		# from pathlib import Path
+		# BASE_DIR = Path(__file__).resolve().parent.parent.parent
+	
+	# 현재 프로젝트 폴더의 manage.py 경로를 기준으로하여 settings.py 파일의 경로를 추적한다.
+	# Project/askcompany/settings/common.py 이렇게 있다면 
+	# 디렉토리 경로의 깊이가 3이고 그안에 common.py이 있으니 dirname 메서드가 3개가 필요하다 (default 깊이는 2)
+	# pathlib을 사용할경우 parent가 dirname역할을 하게된다.

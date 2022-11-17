@@ -1,0 +1,63 @@
+[ git 깔고 한번만 해주면됨 ]
+
+git config --global user.name "Your Name"
+	: 전역 유저 이름설정 
+	
+git config --global user.email you@example.com
+	: 전역 이메일 설정
+
+-------------------------------------------------------------------------------	
+
+[ 기본적으로 사용하는 git 명령어 ]
+
+git init
+	: 저장소 만들기
+	
+git branch -M <변경할 브런치>
+	: branch(저장할 저장소 지점) 변경
+
+git status 
+	: 현재 상태 확인
+	
+git add <폴더/파일경로>
+	: 현재 상태 추가
+	
+git commit -a -m "입력할메세지"
+	: 현재 상태 저장
+	
+git remote add origin URL주소
+	: url주소를 origin 변수에저장
+	
+git pull origin <브런치> 
+	: 원격저장소에서 로컬저장소로 소스 불러오기
+	
+git push -u origin <브런치> 
+	: 저장소로 푸쉬(오류가나면 -u는 강제푸쉬 or +브런치이름) 
+	: 예) git push origin +main
+
+[ 위에 작업들을 전부 했을경우 ]	
+
+git status로 생성/수정된 파일을 알아냄 > git add로 생성/수정된 파일추가 / git commit 으로 저장
+> git push origin <브런치> 을 반복적으로 사용하여 버전 관리를 해주면된다.
+	
+-------------------------------------------------------------------------------
+	
+[ 알아두면 좋은 git 명렁어 ]	
+
+rm <삭제할 파일>
+	: git에서 해당하는 파일 삭제
+
+git clone <URL주소> <디렉토리명>
+	: 원격저장소에서 로컬저장소로 브런치의 파일을 받을때 사용함.
+
+git clone -b <브런치> --single-branch <URL주소> <디렉토리명>
+	: 원격저장소에서 로컬저장소로 원하는 브런치의 파일을 받을때 사용함.
+		
+git log [<options>] [<revision range>] [[--] <path>…​]
+	: 이력 확인
+
+git reset [<commit>] [--soft | --mixed [-N] | --hard | --merge | --keep] 
+	: 이전 상태로 (이력 제거)
+
+git revert <commit>…​ 
+	: 이전 상태로 (이력 유지)
